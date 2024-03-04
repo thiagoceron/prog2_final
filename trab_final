@@ -1,0 +1,316 @@
+#include <iostream>
+#include <string>
+#include <assert.h>
+using namespace std;
+
+typedef struct
+{
+    string marca;
+    string modelo;
+    string ano;
+    string cor;
+} Carro;
+
+int numero_carros, i = 0, j = 0;
+Carro menu[1000];
+char decisao;
+
+/*if (!(Carro menu = new (nothrow) Carro[numero_carros]))
+{
+    cout << "Falha da alocacao de memoria" << endl;
+    return -1;
+}*/
+
+void layout()
+{
+    cout << "BEM VINDO(A) A CONCESSIONARIA, SELECIONE A OPCAO CONFORME SUA NECESSIDADE" << endl;
+    cout << "1 : BUSCAR CARRO POR MARCA" << endl;
+    cout << "2 : BUSCAR CARRO POR MODELO" << endl;
+    cout << "3 : BUSCAR CARRO POR ANO" << endl;
+    cout << "4 : BUSCAR CARRO POR COR" << endl;
+    cout << "5 : ADICIONAR CARRO" << endl;
+    cout << "6 : IMPRIMIR CATALOGO" << endl;
+    cout << "7 : VERIFICAR ORDENACAO" << endl;
+    cout << "8 : SAIR DO MEU" << endl;
+}
+
+void percorrer_carros(Carro menu[], int numero_carros)
+{
+    i = 0;
+    while (i < numero_carros)
+    {
+        cout << "MARCA: " << (menu + i)->marca << endl;
+        cout << "MODELO: " << (menu + i)->modelo << endl;
+        cout << "ANO: " << (menu + i)->ano << endl;
+        cout << "COR: " << (menu + i)->cor << endl;
+        i++;
+    }
+}
+
+int incluir_carros(Carro menu[], int &numero_carros)
+{
+    /*
+    if (!(menu = new (nothrow) Carro[numero_carros]))
+    {
+        cout << "FALHA NA ALOCACAO DE MEMORIA" << endl;
+        return -1;
+    }*/
+    cin.ignore();
+    cout << "DIGITE A MARCA DO CARRO: ";
+    getline(cin, menu[numero_carros].marca);
+    cout << "DIGITE O MODELO DO CARRO: ";
+    getline(cin, menu[numero_carros].modelo);
+    cout << "DIGITE O ANO DO CARRO: ";
+    getline(cin, menu[numero_carros].ano);
+    cout << "DIGITE A COR DO CARRO: ";
+    getline(cin, menu[numero_carros].cor);
+    cin.clear();
+    numero_carros++;
+}
+
+int busca_marca(Carro menu[], int numero_carros)
+{
+    string pesquisa;
+    cout << "DIGITE A MARCA DO CARRO A SER BUSCADA ";
+    cin.ignore();
+    getline(cin, pesquisa);
+    i = 0;
+    j = 0;
+    do
+    {
+        if (menu[i].marca == pesquisa)
+        {
+            cout << "CARRO ENCONTRADO" << endl;
+            cout << "MARCA: " << menu[i].marca << endl;
+            cout << "MODELO: " << menu[i].modelo << endl;
+            cout << "ANO: " << menu[i].ano << endl;
+            cout << "COR: " << menu[i].cor << endl;
+            j++;
+        }
+        i++;
+    } while (i < numero_carros);
+    if (j == 0)
+    {
+        cout << "CARRO NAO EXISTE" << endl;
+        return 0;
+    }
+}
+
+int buscar_modelo(Carro menu[], int numero_carros)
+{
+    string pesquisa;
+    cout << "DIGITE O MODELO DO CARRO A SER BUSCADA ";
+    cin.ignore();
+    getline(cin, pesquisa);
+    i = 0;
+    j = 0;
+    do
+    {
+        if (menu[i].modelo == pesquisa)
+        {
+            cout << "CARRO ENCONTRADO" << endl;
+            cout << "MARCA: " << menu[i].marca << endl;
+            cout << "MODELO: " << menu[i].modelo << endl;
+            cout << "ANO: " << menu[i].ano << endl;
+            cout << "COR: " << menu[i].cor << endl;
+            j++;
+        }
+        i++;
+    } while (i < numero_carros);
+    if (j == 0)
+    {
+        cout << "CARRO NAO EXISTE" << endl;
+        return 0;
+    }
+}
+
+int buscar_cor(Carro menu[], int numero_carros)
+{
+    string pesquisa;
+    cout << "DIGITE A COR DO CARRO A SER BUSCADA ";
+    cin.ignore();
+    getline(cin, pesquisa);
+    i = 0;
+    j = 0;
+    do
+    {
+        if (menu[i].cor == pesquisa)
+        {
+            cout << "CARRO ENCONTRADO" << endl;
+            cout << "MARCA: " << menu[i].marca << endl;
+            cout << "MODELO: " << menu[i].modelo << endl;
+            cout << "ANO: " << menu[i].ano << endl;
+            cout << "COR: " << menu[i].cor << endl;
+            j++;
+        }
+        i++;
+    } while (i < numero_carros);
+    if (j == 0)
+    {
+        cout << "CARRO NAO EXISTE" << endl;
+        return 0;
+    }
+}
+
+int buscar_ano(Carro menu[], int numero_carros)
+{
+    string pesquisa;
+    cout << "DIGITE O ANO DO CARRO A SER BUSCADA ";
+    cin.ignore();
+    getline(cin, pesquisa);
+    i = 0;
+    j = 0;
+    do
+    {
+        if (menu[i].ano == pesquisa)
+        {
+            cout << "CARRO ENCONTRADO" << endl;
+            cout << "MARCA: " << menu[i].marca << endl;
+            cout << "MODELO: " << menu[i].modelo << endl;
+            cout << "ANO: " << menu[i].ano << endl;
+            cout << "COR: " << menu[i].cor << endl;
+            j++;
+        }
+        i++;
+    } while (i < numero_carros);
+    if (j == 0)
+    {
+        cout << "CARRO NAO EXISTE" << endl;
+        return 0;
+    }
+}
+
+void bubble_sort(Carro *menu, int numero_carros)
+{
+    if (numero_carros > 1)
+    {
+        for (int i = 0; i < numero_carros - 1; i++)
+        {
+            if (menu[i].ano > menu[i + 1].ano)
+            {
+                Carro temp = menu[i];
+                menu[i] = menu[i + 1];
+                menu[i + 1] = temp;
+            }
+        }
+        bubble_sort(menu, numero_carros - 1);
+    }
+}
+
+void teste(Carro menu[], int numero_carros)
+{
+    for (int i = 0; i > numero_carros - 1; i++)
+    {
+        assert(menu[i].ano > menu[i + 1].ano);
+    }
+}
+
+int func_principal(int escolha)
+{
+    bubble_sort(menu, numero_carros);
+    layout();
+    switch (escolha)
+    {
+    case 1:
+        cout << "BUSCA POR MARCA" << endl;
+        busca_marca(menu, numero_carros);
+        break;
+    case 2:
+        cout << "BUSCA POR MODELO" << endl;
+        buscar_modelo(menu, numero_carros);
+        break;
+    case 3:
+        cout << "BUSCA POR ANO" << endl;
+        buscar_ano(menu, numero_carros);
+        break;
+    case 4:
+        cout << "BUSCA POR COR" << endl;
+        buscar_cor(menu, numero_carros);
+        break;
+    case 5:
+        cout << "ADICIONAR CARRO" << endl;
+        incluir_carros(menu, numero_carros);
+        break;
+    case 6:
+        cout << "IMPRIMIR CATALOGO" << endl;
+        percorrer_carros(menu, numero_carros);
+        break;
+    case 7:
+        cout << "VERIRIFICAR ORDENACAO" << endl;
+        teste(menu, numero_carros);
+        cout << "TODOS OS TESTES PASSSARAM" << endl;
+        return 1;
+    case 8:
+        cout << "SAINDO DO MENU" << endl;
+        exit(0);
+    default:
+        cout << "OPCAO INVALIDA, POR FAVOR DIGITE UM NUMERO DE 1 A 7";
+        break;
+    }
+}
+
+int escolhas()
+{
+    int escolha;
+    while (true)
+    {
+        cout << "DIGITE A SUA ESCOLHA DE 1 A 8: ";
+        if (cin >> escolha)
+        {
+            if (escolha >= 1 && escolha <= 8)
+            {
+                return escolha;
+            }
+            else
+            {
+                cout << "OPCAO INVALIDA, POR FAVOR DIGITE UM NUMERO DE 1 A 7" << endl;
+            }
+        }
+        else
+        {
+            cout << "OPCAO INVALIDA, POR FAVOR DIGITE UM NUMERO DE 1 A 7" << endl;
+            cin.clear();
+            cin.ignore();
+        }
+    }
+}
+
+void carros_base(Carro menu[])
+{
+    menu[0].marca = "audi";
+    menu[0].modelo = "A4";
+    menu[0].ano = "2022";
+    menu[0].cor = "preto";
+
+    menu[1].marca = "volkswagen";
+    menu[1].modelo = "jetta";
+    menu[1].ano = "2022";
+    menu[1].cor = "preto";
+
+    menu[2].marca = "mitsubish";
+    menu[2].modelo = "lancer evo";
+    menu[2].ano = "2013";
+    menu[2].cor = "azul";
+
+    menu[3].marca = "chevrolet";
+    menu[3].modelo = "astra";
+    menu[3].ano = "2010";
+    menu[3].cor = "vermelho";
+
+    numero_carros = 4;
+}
+
+int main()
+{
+    int escolha = 0;
+    carros_base(menu);
+    do
+    {
+        layout();
+        escolha = escolhas();
+        func_principal(escolha);
+        cout << "Voce deseja fazer mais alguma coisa? S/N" << endl;
+        cin >> decisao;
+        cin.ignore();
+    } while (decisao == 's' || decisao == 'S');
+}
